@@ -142,20 +142,20 @@ class pdfUrl extends GenericPlugin {
 		}
 
 		// Galley links
-$i = $j = 0;
-if (is_a($submission, 'Submission')) {
- foreach ($submission->getGalleys() as $galley) {
-if (is_a($galley->getFile(), 'SupplementaryFile')) {
- continue;
-}
-if ($galley->getFileType() == 'application/pdf') {
- $submissionFile = $galley->getFile();
- $templateMgr->addHeader('googleScholarPdfUrl' . $i++, '<meta name="citation_pdf_url" content="' . $request->url(null, $submissionPath, 'download', array($submission->getBestId(), $galley->getBestGalleyId(), $submissionFile->getFileId(), $galley->getLocale())) . '"/>');
-} elseif ($galley->getFileType() == 'text/html') {
- $templateMgr->addHeader('googleScholarHtmlUrl' . $i++, '<meta name="citation_fulltext_html_url" content="' . $request->url(null, $submissionPath, 'view', array($submission->getBestId(), $galley->getBestGalleyId()), $galley->getLocale()) . '"/>');
-}
- }
-}
+		$i = $j = 0;
+		if (is_a($submission, 'Submission')) {
+		 foreach ($submission->getGalleys() as $galley) {
+		if (is_a($galley->getFile(), 'SupplementaryFile')) {
+		 continue;
+		}
+		if ($galley->getFileType() == 'application/pdf') {
+		 $submissionFile = $galley->getFile();
+		 $templateMgr->addHeader('googleScholarPdfUrl' . $i++, '<meta name="citation_pdf_url" content="' . $request->url(null, $submissionPath, 'download', array($submission->getBestId(), $galley->getBestGalleyId(), $submissionFile->getFileId(), $galley->getLocale())) . '"/>');
+		} elseif ($galley->getFileType() == 'text/html') {
+		 $templateMgr->addHeader('googleScholarHtmlUrl' . $i++, '<meta name="citation_fulltext_html_url" content="' . $request->url(null, $submissionPath, 'view', array($submission->getBestId(), $galley->getBestGalleyId()), $galley->getLocale()) . '"/>');
+		}
+		 }
+		}
 
 		// Citations
 		$outputReferences = array();
